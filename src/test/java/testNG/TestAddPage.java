@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 public class TestAddPage {
     private static WebDriver driver;
-    private static String serverBaseURL= "http://localhost:8090";
+//    private static String serverBaseURL= "http://localhost:8090";
+    private static String serverBaseURL= System.getProperty("serverBaseURL");
     private static String webpageURI= "/";
 
     @BeforeTest
@@ -28,7 +29,7 @@ public class TestAddPage {
     public static void testAddition() throws InterruptedException {
         int op1 = 1;
         int op2 = 2;
-        int expresult = op1 + op2 + 1;
+        int expresult = op1 + op2;
         driver.get(serverBaseURL+webpageURI);
         Thread.sleep(1000);
         String expectedString= "You have reached some content here. Congratulations!";
