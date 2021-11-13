@@ -6,6 +6,7 @@ stages:
   - upload
   - deploy_stage
   - acceptance_test
+  - deploy_product
 
 variables:
   # This will suppress any download for dependencies and plugins or upload messages which would clutter the console log.
@@ -64,3 +65,11 @@ acc_test_app:
   script:
     - mvn surefire:test@TestNg-execution -Denv.BASEURL=$STAGE_BASE_URL
 
+
+deploy_product:
+    stage: deploy_product
+    tags:
+    - product-vm-shell
+    script:
+    - sudo cp target/*.jar /home/vagrant/SEE.jar
+    - nohup java -jar /home/vagrant/SEE.jar > /dev/null 2>&1 &

@@ -9,8 +9,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
+import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 public class TestAddPage {
     private static WebDriver driver;
@@ -19,15 +23,22 @@ public class TestAddPage {
     private static String webpageURI= "/";
 
     @BeforeTest
-    public static void configureDriver() {
-        System.setProperty("webdriver.chrome.driver" ,  "lib/linux/chromedriver");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-        options.addArguments("--disable-dev-shm-usage");
-        driver=new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+    public static void configureDriver() throws MalformedURLException{
+    
+	final ChromeOptions chromeOptions = new ChromeOptions();
+	chromeOptions.addArguments("--headless");
+	chromeOptions.addArguments("--no-sandbox");
+	chromeOptions.addArguments("--disable-dev-shm-usage");
+	chromeOptions.addArguments("--window-size=1200x600");
+
+	chromeOptions.setBinary("/usr/bin/google-chrome");
+	DesiredCapabilities capability = DesiredCapabilities.chrome();
+	capability.setBrowserName("chrome");
+	capability.setPlatform(Platform.LINUX);
+
+	capability.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+
+	driver = new RemoteWebDriver(new URL("http://selenium__standalone-chrome:4444/wd/hub"), capability);
     }
 
     @Test
