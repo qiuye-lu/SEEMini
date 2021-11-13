@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeTest;
@@ -13,14 +14,18 @@ import java.util.concurrent.TimeUnit;
 
 public class TestAddPage {
     private static WebDriver driver;
-//    private static String serverBaseURL= "http://localhost:8090";
+    //private static String serverBaseURL= "http://localhost:8090";
     private static String serverBaseURL= System.getProperty("serverBaseURL");
     private static String webpageURI= "/";
 
     @BeforeTest
     public static void configureDriver() {
         System.setProperty("webdriver.chrome.driver" ,  "lib/linux/chromedriver");
-        driver=new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+        options.addArguments("--disable-dev-shm-usage");
+        driver=new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
