@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class CalcController {
 
 //  Code with correct calculation
-    @PostMapping(value = "/add")
+/*    @PostMapping(value = "/add")
     public String add(@RequestParam(value = "op1") int op1, @RequestParam(value = "op2") int op2){
         int result = op1 + op2;
         return  String.valueOf(result);
     }
-
+*/
 
 //  Code with incorrect calculation
 /*
@@ -32,13 +32,13 @@ public class CalcController {
 */
 
 //  Code with compilation error
-/*
+
     @PostMapping(value = "/add")
     public String add(@RequestParam(value = "op1") int op1, @RequestParam(value = "op2") int op2){
         int result = op1 + op2
         return  String.valueOf(result);
     }
-*/
+
 }
 
 

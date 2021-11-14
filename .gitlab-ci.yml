@@ -54,8 +54,8 @@ deploy_stage:
     - stage-vm-shell
     script:
     - sudo cp target/*.jar /home/vagrant/SEE.jar
-    - ps aux |grep SEE |grep -v 'grep' | awk '{print $2}'|xargs sudo kill -9
-    - nohup java -jar /home/vagrant/SEE.jar > /dev/null 2>&1 &
+    - ps aux |grep SEE |grep -v 'grep' | awk '{print $2}'|xargs sudo kill -9 || true
+    - sudo nohup java -jar /home/vagrant/SEE.jar > /dev/null 2>&1 &
 
 acc_test_app:
   stage: acceptance_test
@@ -73,5 +73,5 @@ deploy_product:
     - product-vm-shell
     script:
     - sudo cp target/*.jar /home/vagrant/SEE.jar
-    - ps aux |grep SEE |grep -v 'grep' | awk '{print $2}'|xargs sudo kill -9
-    - nohup java -jar /home/vagrant/SEE.jar > /dev/null 2>&1 &
+    - ps aux |grep SEE |grep -v 'grep' | awk '{print $2}'|xargs sudo kill -9 || true
+    - sudo nohup java -jar /home/vagrant/SEE.jar > /dev/null 2>&1 &
