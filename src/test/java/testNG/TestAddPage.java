@@ -41,6 +41,8 @@ public class TestAddPage {
 	driver = new RemoteWebDriver(new URL("http://selenium__standalone-chrome:4444/wd/hub"), capability);
     }
 
+//  Correct calculation
+
     @Test
     public static void testAddition() throws InterruptedException {
         int op1 = 1;
@@ -58,6 +60,26 @@ public class TestAddPage {
         Thread.sleep(1000);
     }
 
+
+// Incorrect calculation
+/*
+    @Test
+    public static void testAddition() throws InterruptedException {
+        int op1 = 1;
+        int op2 = 2;
+        int expresult = op1 + op2 + 1;
+        driver.get(serverBaseURL+webpageURI);
+        Thread.sleep(1000);
+        String expectedString= "You have reached some content here. Congratulations!";
+        driver.findElement(By.id("op1")).sendKeys(String.valueOf(op1));
+        driver.findElement(By.id("op2")).sendKeys(String.valueOf(op2));
+        driver.findElement(By.id("submitBtn")).click();
+        Thread.sleep(1000);
+        String result = driver.findElement(By.id("output")).getAttribute("value");
+        Assert.assertEquals(String.valueOf(expresult), result);
+        Thread.sleep(1000);
+    }
+*/
 
     @AfterSuite
     public static void closeDriver() {
